@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>00:00:00:00</div>
+    <button>开始</button>
+    <button disabled>暂停</button>
+
+    <script>
+
+        var ms = 0;  
+        var s = 0;   
+        var m = 0;   
+        var h = 0;  
+        var msStr = '';
+        var sStr = '';
+        var mStr = '';
+        var hStr = '';
+
+      
+        var time = 0;
+
+  
+        var oDiv = document.querySelector('div');
+     
+        var oStart = document.querySelectorAll('button')[0]; 
+        var oPause  = document.querySelectorAll('button')[1]; 
+
+        oStart.onclick = function(){
+            setTimeStr();
+            oPause.disabled = false;
+            oStart.disabled = true;
+        }
+
+      
+        oPause.onclick = function(){
+           
+            clearInterval(time);
+            oPause.disabled = true;
+            oStart.disabled = true;
+           
+        }
+
+      
+     
+        function setTimeStr(){        
+            time = setInterval(function(){
+                ms++;
+              
+                if(ms == 100){
+                    s++;      
+                    ms = 0;    
+                }
+
+                if(s == 60){
+                    m++;      
+                    s = 0;   
+                }
+
+                if(m == 60){
+                    h++;       
+                    m = 0;     
+                }
+             
+                if(h == 100){
+                    h = 0;
+                }
+
+            
+                if(ms < 10){
+                    msStr = '0' + ms;
+                }else{
+                    msStr = ms;
+                }
+
+                if(s < 10){
+                    sStr = '0' + s;
+                }else{
+                    sStr = s;
+                }
+
+                if(m < 10){
+                    mStr = '0' + m;
+                }else{
+                    mStr = m;
+                }
+
+                if(h < 10){
+                    hStr = '0' + h;
+                }else{
+                    hStr = h;
+                }
+               
+                oDiv.innerHTML = `${hStr}:${mStr}:${sStr}:${msStr}`;
+            } , 10);        
+            console.log(time);
+        }   
+    </script>
+
+    
+</body>
+</html>
+————————————————
